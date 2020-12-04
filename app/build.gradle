@@ -23,6 +23,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    allprojects {
+        repositories {
+            jcenter()
+            maven {  url "http://maven.google.com/" }
+        }
+    }
 }
 
 dependencies {
@@ -42,4 +48,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
+    //Yandex maps
+    implementation 'com.yandex.android:mapkit:3.5.0'
+    implementation 'com.yandex.android:directions:3.5.0'
+    implementation 'com.yandex.android:places:3.5.0'
+    implementation 'com.yandex.android:search:3.5.0'
 }
