@@ -21,10 +21,22 @@ class MapActivity : AppCompatActivity() {
         MapKitFactory.initialize(this)
         setContentView(R.layout.activity_map)
         mapview = findViewById<MapView>(R.id.map_view)
-        mapview!!.map.move(
+        mapview?.map?.move(
             CameraPosition(Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0F),
             null
         )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mapview?.onStop()
+        MapKitFactory.getInstance().onStop()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mapview?.onStart()
+        MapKitFactory.getInstance().onStart()
     }
 }
