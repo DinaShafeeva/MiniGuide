@@ -15,10 +15,11 @@ class MapActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_map)
 
         MapKitFactory.setApiKey("61407ca4-bd81-4965-99a5-fab425b40bd4")
         MapKitFactory.initialize(this)
+        setContentView(R.layout.activity_map)
+
         setContentView(R.layout.activity_map)
         mapview = findViewById<MapView>(R.id.map_view)
         mapview?.map?.move(
