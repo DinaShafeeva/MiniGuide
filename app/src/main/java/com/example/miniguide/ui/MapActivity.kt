@@ -1,7 +1,6 @@
 package com.example.miniguide.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.example.miniguide.R
@@ -10,13 +9,14 @@ import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Geometry
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.MapObjectCollection
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.mapkit.search.*
+import com.yandex.runtime.image.ImageProvider
 import kotlinx.android.synthetic.main.activity_map.*
 
-
 class MapActivity : AppCompatActivity() {
-    private var mapview: MapView? = null
+    private var mapView: MapView? = null
     private var searchManager: SearchManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +30,9 @@ class MapActivity : AppCompatActivity() {
 
         searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
 
-        mapview = findViewById<MapView>(R.id.map_view)
+        mapView = findViewById<MapView>(R.id.map_view)
 
-        mapview?.map?.move(
+        mapView?.map?.move(
             CameraPosition(Point(55.751574, 37.573856), 11.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0F),
             null
@@ -69,12 +69,26 @@ class MapActivity : AppCompatActivity() {
                     point,
                     SearchOptions(),
                     object : Session.SearchListener {
-                        override fun onSearchResponse(p0: Response) {
-                            val cities = p0.collection.children.firstOrNull()?.obj
+                        override fun onSearchResponse(response: Response) {
+                            val cities = response.collection.children.firstOrNull()?.obj
                                 ?.metadataContainer
                                 ?.getItem(ToponymObjectMetadata::class.java)
                                 ?.address
-                            Log.d("SearchView", p0.metadata.found.toString())
+                            val mapObjects: MapObjectCollection? = mapView?.map?.mapObjects
+                            mapObjects?.clear()
+                            response.collection.children.forEach { searchResult ->
+                                val resultLocation: Point? =
+                                    searchResult.obj?.geometry?.get(0)?.point
+                                if (resultLocation != null) {
+                                    mapObjects?.addPlacemark(
+                                        resultLocation,
+                                        ImageProvider.fromResource(
+                                            this@MapActivity,
+                                            R.drawable.search_result
+                                        )
+                                    )
+                                }
+                            }
                         }
 
                         override fun onSearchError(p0: com.yandex.runtime.Error) {
@@ -89,13 +103,13 @@ class MapActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        mapview?.onStop()
+        mapView?.onStop()
         MapKitFactory.getInstance().onStop()
     }
 
     override fun onStart() {
         super.onStart()
-        mapview?.onStart()
+        mapView?.onStart()
         MapKitFactory.getInstance().onStart()
     }
 }
