@@ -16,11 +16,18 @@ buildscript {
         navigation_version = "2.3.1"
         lifecycle_version = "2.2.0"
         daggerVersion = "2.28.3"
-        retrofitVersion = "2.9.0"
+        retrofitVersion = "2.5.0"
         gsonVersion = "2.8.5"
         okHttpVersion = "4.7.2"
         roomVersion = "2.3.0-alpha03"
         swipeRefreshLayout = "1.1.0"
+
+        permissionsVersion = '1.1.2'
+
+        navControllerVersion = '2.3.5'
+
+        mapBoxMapVersion = '9.6.1'
+        mapBoxNavigationVersion = '0.42.6'
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.2"
