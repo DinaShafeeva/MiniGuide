@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.miniguide"
-        minSdkVersion 28
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -26,9 +26,25 @@ android {
         repositories {
             jcenter()
             maven {  url "http://maven.google.com/" }
-            maven { url 'https://github.com/yandexmobile/yandexmapkit-android/raw/maven/' }
+            maven {  url 'https://mapbox.bintray.com/mapbox' }
+            maven {
+                url 'https://api.mapbox.com/downloads/v2/releases/maven'
+                authentication {
+                    basic(BasicAuthentication)
+                }
+                credentials {
+                    // Do not change the username below.
+                    // This should always be `mapbox` (not your username).
+                    username = 'mapbox'
+                    // Use the secret token you stored in gradle.properties as the password
+                    password = project.properties["MAPBOX_DOWNLOADS_TOKEN"] ?: ""
+                }
+            }
             mavenCentral()
         }
+    }
+    kotlinOptions {
+        freeCompilerArgs = ["-Xallow-result-return-type"]
     }
 }
 
@@ -50,12 +66,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
-    //Yandex maps
-    implementation 'com.yandex.android:mapkit:3.5.0'
-    implementation 'com.yandex.android:directions:3.5.0'
-    implementation 'com.yandex.android:transport:3.5.0'
-    implementation 'com.yandex.android:search:3.5.0'
-
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
@@ -70,5 +80,18 @@ dependencies {
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$ktx_version"
+
+    //permission
+    implementation "com.github.florent37:runtime-permission-kotlin:$permissionsVersion"
+
+    //navigation
+    implementation  "androidx.navigation:navigation-fragment-ktx:$navControllerVersion"
+    implementation  "androidx.navigation:navigation-ui-ktx:$navControllerVersion"
+
+    //mapBox
+    //map
+    implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$mapBoxMapVersion"
+    //navigation
+    implementation "com.mapbox.mapboxsdk:mapbox-android-navigation-ui:$mapBoxNavigationVersion"
 
 }
