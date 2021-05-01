@@ -1,6 +1,6 @@
 package com.example.miniguide.app
 
-import com.example.miniguide.RootActivity
+import com.example.miniguide.ui.root.RootActivity
 import com.example.miniguide.di.AppModule
 import com.example.miniguide.di.ViewModelModule
 import dagger.Component
