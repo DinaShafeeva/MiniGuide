@@ -3,5 +3,9 @@
     <string name="unknown_error_message">Что-то непонятное происходит</string>
     <string name="remote_error_message">У них там что-то сломалось</string>
     <string name="network_error_message">У тебя тут что-то сломалось с сетью</string>
+
     <string name="mapbox_access_token">pk.eyJ1IjoiZXBpY3VzIiwiYSI6ImNrbzRubnJ1YjFremsycXBnczk0ZnV0NWYifQ.kR8J7q7vH7sqI9U5vdF-rA</string>
+
+    <string name="start_point">Пункт отправления</string>
+    <string name="end_point">Пункт назначения</string>
 </resources>

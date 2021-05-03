@@ -9,6 +9,16 @@
         android:id="@+id/mapFragment"
         android:name="com.example.miniguide.ui.map.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_routesFragment"
+            app:destination="@id/routesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/routesFragment"
+        android:name="com.example.miniguide.ui.routes.RoutesFragment"
+        android:label="routes_fragment"
+        tools:layout="@layout/routes_fragment" />
 
 </navigation>
