@@ -21,6 +21,10 @@ buildscript {
         okHttpVersion = "4.7.2"
         roomVersion = "2.3.0-alpha03"
         swipeRefreshLayout = "1.1.0"
+        permissionsVersion = '1.1.2'
+        navControllerVersion = '2.3.5'
+        mapBoxMapVersion = '9.2.1'
+        mapBoxNavigationVersion = '0.42.6'
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.2"
