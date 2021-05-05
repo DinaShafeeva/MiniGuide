@@ -28,6 +28,8 @@ buildscript {
 
         mapBoxMapVersion = '9.6.1'
         mapBoxNavigationVersion = '0.42.6'
+
+        architectureComponentVersion = '2.2.0'
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.2"

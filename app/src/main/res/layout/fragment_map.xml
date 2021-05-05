@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.map.MapFragment">
+    tools:context=".map.MapFragment">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -12,31 +12,16 @@
         android:layout_height="match_parent"
         />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.example.miniguide.ui.routes.customView.PlacesSearchAutoCTextView
-            android:id="@+id/tv1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:completionThreshold="1"
-            android:hint="blsdfllsdf"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/mapView"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:resultLimit="3" />
-
-    </LinearLayout>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back_to_camera_tracking_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:src="@drawable/ic_route"
+        android:backgroundTint="@color/colorWhite"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".routes.pointSearch.PointSearchFragment">
+
+    <com.example.miniguide.routes.pointSearch.сustomView.PlacesSearchEditText
+        android:id="@+id/tvPointSearcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/very_small_margin"
+        android:background="@drawable/background_oval"
+        android:hint="@string/start_point"
+        android:textSize="@dimen/default_text_size" />
+
+    <LinearLayout
+        android:id="@+id/myLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:layout_marginBottom="@dimen/very_small_margin"
+            android:background="@drawable/background_circle"
+            android:src="@drawable/ic_marker" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/my_location_text"
+            android:textColor="@color/colorLightPurple" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chooseOnMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:layout_marginBottom="@dimen/very_small_margin"
+            android:background="@drawable/background_circle"
+            android:src="@drawable/ic_map" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/choose_on_map_text"
+            android:textColor="@color/colorLightPurple" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/radioGroupDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/colorSeparator" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPoints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_point_list" />
+
+</LinearLayout>
