@@ -13,19 +13,23 @@
         />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-        <SearchView
-            android:id="@+id/searchView"
+        <com.example.miniguide.ui.routes.customView.PlacesSearchAutoCTextView
+            android:id="@+id/tv1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layoutDirection="rtl"
-            app:iconifiedByDefault="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:completionThreshold="1"
+            android:hint="blsdfllsdf"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/mapView"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:resultLimit="3" />
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

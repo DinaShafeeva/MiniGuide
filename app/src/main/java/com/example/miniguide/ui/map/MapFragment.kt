@@ -5,13 +5,15 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.miniguide.R
+import com.example.miniguide.app.di.Injector
 import com.example.miniguide.common.extension.askPermissionsSafely
+import com.example.miniguide.ui.routes.adapters.CustomArrayAdapter
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.location.*
 import com.mapbox.mapboxsdk.location.modes.CameraMode
@@ -20,6 +22,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.launch
+
 
 class MapFragment : Fragment() {
 
@@ -45,13 +48,16 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Mapbox.getInstance(requireContext(), getString(R.string.mapbox_access_token))
+        mapView?.onCreate(savedInstanceState)
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestMapPermissions()
-        mapView?.onCreate(savedInstanceState)
+//        back_to_camera_tracking_mode.setOnClickListener {
+//            view.findNavController().navigate(R.id.action_mapFragment_to_routesFragment)
+//        }
     }
 
     private fun initMapView() {
@@ -78,24 +84,14 @@ class MapFragment : Fragment() {
                     .locationComponentOptions(customLocationComponentOptions)
                     .build()
 
-            // Activate with options
-            locationComponent.activateLocationComponent(locationComponentActivationOptions)
-
-            // Enable to make component visible
-            locationComponent.isLocationComponentEnabled = true
-
-            // Set the component's camera mode
-            locationComponent.cameraMode = CameraMode.TRACKING
-
-            // Set the component's render mode
-            locationComponent.renderMode = RenderMode.COMPASS
-
-            // Add the location icon click listener
-            locationComponent.addOnLocationClickListener(onLocationClickListener)
-
-            // Add the camera tracking listener. Fires if the map camera is manually moved.
-            locationComponent.addOnCameraTrackingChangedListener(onCameraTrackingChangedListener)
-
+            locationComponent.apply {
+                activateLocationComponent(locationComponentActivationOptions)
+                isLocationComponentEnabled = true
+                cameraMode = CameraMode.TRACKING
+                renderMode = RenderMode.COMPASS
+                addOnLocationClickListener(onLocationClickListener)
+                addOnCameraTrackingChangedListener(onCameraTrackingChangedListener)
+            }
         }
     }
 
@@ -139,6 +135,7 @@ class MapFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        Injector.clearRoutesComponent()
         mapView?.onDestroy()
     }
 }
