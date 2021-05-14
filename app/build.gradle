@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.miniguide"
-        minSdkVersion 28
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -45,6 +45,7 @@ android {
     }
     kotlinOptions {
         freeCompilerArgs = ["-Xallow-result-return-type"]
+        jvmTarget = "1.8"
     }
 }
 
@@ -56,6 +57,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -66,6 +68,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
@@ -80,14 +83,20 @@ dependencies {
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$ktx_version"
+
+    //permission
+    implementation "com.github.florent37:runtime-permission-kotlin:$permissionsVersion"
+
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navControllerVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navControllerVersion"
+
     //mapBox
     //map
     implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$mapBoxMapVersion"
     //navigation
     implementation "com.mapbox.mapboxsdk:mapbox-android-navigation-ui:$mapBoxNavigationVersion"
-    //permission
-    implementation "com.github.florent37:runtime-permission-kotlin:$permissionsVersion"
-    //navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$navControllerVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navControllerVersion"
+
+    implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.12"
+
 }
