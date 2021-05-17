@@ -1,6 +1,8 @@
 package com.example.miniguide.di
 
 import android.content.Context
+import com.example.miniguide.remote.routes.RoutesRepository
+import com.example.miniguide.remote.routes.RoutesRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,9 +14,9 @@ class AppModule(private val context: Context) {
     @Singleton
     fun provideAppContext(): Context = context
 
-//    @Provides
-//    @Singleton
-//    fun provideProfileRepository(remote: IProfileRemote, cache: IProfileCache): IProfileRepository =
-//        ProfileRepository(remote, cache)
+    @Provides
+    @Singleton
+    fun provideRoutesRepository(): RoutesRepository =
+        RoutesRepositoryImpl()
 
 }

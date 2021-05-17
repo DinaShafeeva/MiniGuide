@@ -6,21 +6,22 @@
     android:orientation="vertical"
     tools:context=".ui.routes.RoutesFragment">
 
-    <com.example.miniguide.ui.LocationTextView
-        android:id="@+id/routesView1"
+    <com.example.miniguide.ui.customViews.LocationTextView
+        android:id="@+id/tvStartPoint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
         android:hint="@string/start_point" />
 
-    <com.example.miniguide.ui.LocationTextView
-        android:id="@+id/routesView2"
+    <com.example.miniguide.ui.customViews.LocationTextView
+        android:id="@+id/tvEndPoint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
         android:hint="@string/end_point" />
 
 </LinearLayout>

@@ -7,8 +7,20 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.miniguide.ui.MapFragment"
+        android:name="com.example.miniguide.ui.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/routesFragment"
+        android:name="com.example.miniguide.ui.routes.RoutesFragment"
+        android:label="fragment_routes"
+        tools:layout="@layout/fragment_routes" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.miniguide.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 
 </navigation>

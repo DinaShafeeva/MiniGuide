@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.miniguide.ui.base.ViewModelFactory
 import com.example.miniguide.ui.routes.RoutesViewModel
+import com.example.miniguide.ui.search.SearchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -16,6 +17,11 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(RoutesViewModel::class)
-    abstract fun bindProfileViewModel(viewModel: RoutesViewModel): ViewModel
+    abstract fun bindRoutesViewModel(viewModel: RoutesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel::class)
+    abstract fun bindSearchViewModel(viewModel: SearchViewModel): ViewModel
 
 }

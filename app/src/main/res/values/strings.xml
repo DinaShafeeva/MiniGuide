@@ -6,4 +6,7 @@
     <string name="mapbox_access_token">pk.eyJ1IjoiZXBpY3VzIiwiYSI6ImNrbzRubnJ1YjFremsycXBnczk0ZnV0NWYifQ.kR8J7q7vH7sqI9U5vdF-rA</string>
     <string name="start_point">Пункт отправления</string>
     <string name="end_point">Пункт назначения</string>
+    <string name="choose_on_map_text">Выберите на карте</string>
+    <string name="my_location_text">Мое положение</string>
+    <string name="point_text">%1$s, %2$s</string>
 </resources>

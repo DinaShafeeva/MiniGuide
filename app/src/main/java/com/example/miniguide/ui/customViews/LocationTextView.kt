@@ -1,4 +1,4 @@
-package com.example.miniguide.ui
+package com.example.miniguide.ui.customViews
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,30 +15,36 @@ class LocationTextView @JvmOverloads constructor(
 
     init {
         initBackground()
+        initPadding()
         initHintText()
         initArrow()
     }
 
     private fun initArrow() {
-        setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, AppCompatResources.getDrawable(context, R.drawable.ic_forward_arrow), null)
+        setCompoundDrawablesRelativeWithIntrinsicBounds(
+            null,
+            null,
+            AppCompatResources.getDrawable(context, R.drawable.ic_forward_arrow),
+            null
+        )
+    }
+
+    private fun initPadding() {
+        val padding = resources.getDimensionPixelOffset(R.dimen.location_tv_padding)
+        setPadding(padding, padding, padding, padding)
     }
 
     @SuppressLint("ResourceAsColor")
     private fun initHintText() {
-        this.apply {
-            setTextSize(
-                TypedValue.COMPLEX_UNIT_PX,
-                resources.getDimension(R.dimen.size_text)
-            )
+        setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            resources.getDimension(R.dimen.default_text_size)
+        )
 
-            val padding = resources.getDimensionPixelOffset(R.dimen.location_tv_padding)
-            setPadding(padding, padding, padding, padding)
-
-            setHintTextColor(R.color.colorHintLocation)
-        }
+        setHintTextColor(R.color.colorHintLocation)
     }
 
     private fun initBackground() {
-        this.background = ContextCompat.getDrawable(context, R.drawable.background_shape)
+        background = ContextCompat.getDrawable(context, R.drawable.background_shape)
     }
 }

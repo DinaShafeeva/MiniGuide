@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PlacesSearchAutoCTextView">
+        <attr name="resultLimit" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="LocationTextView">
+        <attr name="paddingStart" format="dimension" />
+        <attr name="paddingTop" format="dimension" />
+        <attr name="paddingBottom" format="dimension" />
+        <attr name="paddingEnd" format="dimension" />
+    </declare-styleable>
+</resources>
