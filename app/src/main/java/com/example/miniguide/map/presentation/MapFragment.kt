@@ -1,4 +1,4 @@
-package com.example.miniguide.map
+package com.example.miniguide.map.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -10,34 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.miniguide.R
+import com.example.miniguide.app.di.Injector
+import com.example.miniguide.common.base.BaseFragment
 import com.example.miniguide.common.extension.askPermissionsSafely
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.location.*
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
+import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.launch
 
 
-class MapFragment : Fragment() {
-
-    private val onLocationClickListener = OnLocationClickListener {
-        Log.e("Callback - ", " OnLocationClickListener")
-    }
-
-    private val onCameraTrackingChangedListener = object : OnCameraTrackingChangedListener {
-        override fun onCameraTrackingDismissed() {
-            Log.e("Callback - ", " onCameraTrackingChangedListener")
-
-        }
-
-        override fun onCameraTrackingChanged(currentMode: Int) {
-            Log.e("Callback - ", " onCameraTrackingChanged")
-        }
-
-    }
+class MapFragment : BaseFragment<MapViewModel>() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,9 +38,23 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView?.onCreate(savedInstanceState)
+    }
+
+    override fun subscribe() {
+        TODO("Not yet implemented")
+    }
+
+    override fun inject() {
+       Injector.plusMapComponent(this).inject(this)
+    }
+
+    override fun initViews() {
         requestMapPermissions()
+    }
+
+    override fun initClickListeners() {
         back_to_camera_tracking_mode.setOnClickListener {
-            view.findNavController().navigate(R.id.action_global_routesFragment)
+//            view?.findNavController().navigate(R.id.action_global_routesFragment)
         }
     }
 
@@ -86,8 +87,6 @@ class MapFragment : Fragment() {
                 isLocationComponentEnabled = true
                 cameraMode = CameraMode.TRACKING
                 renderMode = RenderMode.COMPASS
-                addOnLocationClickListener(onLocationClickListener)
-                addOnCameraTrackingChangedListener(onCameraTrackingChangedListener)
             }
         }
     }

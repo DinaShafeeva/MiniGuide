@@ -26,11 +26,9 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
 
     override fun subscribe() {
         viewModel.currentStartPoint.observe {
-            Log.e("currentStartPoint - ", it.toString())
             tvStartPoint.text = context?.getString(R.string.point_text, it.name, it.location)
         }
         viewModel.currentEndPoint.observe {
-            Log.e("currentEndPoint - ", it.toString())
             tvEndPoint.text = context?.getString(R.string.point_text, it.name, it.location)
         }
     }

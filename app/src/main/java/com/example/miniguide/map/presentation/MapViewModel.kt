@@ -1,4 +1,4 @@
-package com.example.miniguide.map
+package com.example.miniguide.map.presentation
 
 import androidx.lifecycle.ViewModel
 
