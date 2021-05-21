@@ -1,4 +1,4 @@
-package com.example.miniguide.routes.pointSearch.сustomView
+package com.example.miniguide.routes.presentation.pointSearch.сustomView
 
 import android.annotation.SuppressLint
 import android.content.Context

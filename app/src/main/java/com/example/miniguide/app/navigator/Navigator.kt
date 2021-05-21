@@ -3,8 +3,8 @@ package com.example.miniguide.app.navigator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import com.example.miniguide.R
-import com.example.miniguide.routes.pointSearch.PointSearchFragment
-import com.example.miniguide.routes.pointSearch.model.PointTypeModel
+import com.example.miniguide.routes.presentation.pointSearch.PointSearchFragment
+import com.example.miniguide.routes.presentation.pointSearch.model.PointTypeModel
 import com.example.miniguide.routes.router.RoutesRouter
 
 class Navigator : RoutesRouter{

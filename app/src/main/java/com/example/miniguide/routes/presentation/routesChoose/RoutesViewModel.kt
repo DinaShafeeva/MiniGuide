@@ -1,18 +1,17 @@
-package com.example.miniguide.routes.pointSearch
+package com.example.miniguide.routes.presentation.routesChoose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.miniguide.routes.domain.RoutesInteractor
-import com.example.miniguide.routes.pointSearch.model.PointModel
+import com.example.miniguide.routes.presentation.pointSearch.model.PointTypeModel
 import com.example.miniguide.routes.router.RoutesRouter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.shareIn
-import kotlinx.coroutines.launch
 
-class PointSearchViewModel(
+class RoutesViewModel(
     private val interactor: RoutesInteractor,
     private val router: RoutesRouter
 ) : ViewModel() {
@@ -25,23 +24,8 @@ class PointSearchViewModel(
         .flowOn(Dispatchers.Default)
         .share()
 
-
-    fun setStartPoint(point: PointModel) {
-        viewModelScope.launch {
-            interactor.setStartPoint(point)
-            goBack()
-        }
-    }
-
-    fun setEndPoint(point: PointModel) {
-        viewModelScope.launch {
-            interactor.setEndPoint(point)
-            goBack()
-        }
-    }
-
-    private fun goBack() {
-        router.back()
+    fun openPointSearch(pointTypeModel: PointTypeModel) {
+        router.openPointSearch(pointTypeModel)
     }
 
     //transfer to Base VM

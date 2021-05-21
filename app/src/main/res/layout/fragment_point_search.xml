@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".routes.pointSearch.PointSearchFragment">
+    tools:context=".routes.presentation.pointSearch.PointSearchFragment">
 
-    <com.example.miniguide.routes.pointSearch.сustomView.PlacesSearchEditText
+    <com.example.miniguide.routes.presentation.pointSearch.сustomView.PlacesSearchEditText
         android:id="@+id/tvPointSearcher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.miniguide.routes.routesChoose.customView
+package com.example.miniguide.routes.presentation.routesChoose.customView
 
 import android.annotation.SuppressLint
 import android.content.Context

@@ -1,8 +1,8 @@
 package com.example.miniguide.app.di
 
 import com.example.miniguide.routes.di.RoutesComponent
-import com.example.miniguide.routes.pointSearch.PointSearchFragment
-import com.example.miniguide.routes.routesChoose.RoutesFragment
+import com.example.miniguide.routes.presentation.pointSearch.PointSearchFragment
+import com.example.miniguide.routes.presentation.routesChoose.RoutesFragment
 
 object Injector {
 

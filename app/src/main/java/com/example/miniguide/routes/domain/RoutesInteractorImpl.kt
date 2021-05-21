@@ -1,7 +1,7 @@
 package com.example.miniguide.routes.domain
 
 import com.example.miniguide.routes.data.RoutesRepository
-import com.example.miniguide.routes.pointSearch.model.PointModel
+import com.example.miniguide.routes.presentation.pointSearch.model.PointModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

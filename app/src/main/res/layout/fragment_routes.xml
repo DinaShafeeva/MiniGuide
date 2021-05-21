@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".routes.routesChoose.RoutesFragment">
+    tools:context=".routes.presentation.routesChoose.RoutesFragment">
 
-    <com.example.miniguide.routes.routesChoose.customView.LocationTextView
+    <com.example.miniguide.routes.presentation.routesChoose.customView.LocationTextView
         android:id="@+id/tvStartPoint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:layout_marginEnd="@dimen/default_margin"
         android:hint="@string/start_point" />
 
-    <com.example.miniguide.routes.routesChoose.customView.LocationTextView
+    <com.example.miniguide.routes.presentation.routesChoose.customView.LocationTextView
         android:id="@+id/tvEndPoint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

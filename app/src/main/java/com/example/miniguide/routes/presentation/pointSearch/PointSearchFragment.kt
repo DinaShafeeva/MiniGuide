@@ -1,7 +1,6 @@
-package com.example.miniguide.routes.pointSearch
+package com.example.miniguide.routes.presentation.pointSearch
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +10,14 @@ import com.example.miniguide.app.di.Injector
 import com.example.miniguide.app.navigator.Navigator
 import com.example.miniguide.common.base.BaseFragment
 import com.example.miniguide.common.utils.KeyboardUtils
-import com.example.miniguide.routes.pointSearch.adapter.PointsAdapter
-import com.example.miniguide.routes.pointSearch.model.PointModel
-import com.example.miniguide.routes.pointSearch.model.PointTypeModel
+import com.example.miniguide.routes.presentation.pointSearch.adapter.PointsAdapter
+import com.example.miniguide.routes.presentation.pointSearch.model.PointModel
+import com.example.miniguide.routes.presentation.pointSearch.model.PointTypeModel
 import com.mapbox.search.ResponseInfo
 import com.mapbox.search.SearchSelectionCallback
 import com.mapbox.search.result.SearchResult
 import com.mapbox.search.result.SearchSuggestion
 import kotlinx.android.synthetic.main.fragment_point_search.*
-import kotlinx.android.synthetic.main.fragment_routes.*
 import javax.inject.Inject
 
 private const val KEY_POINT_TYPE = "KEY_POINT_TYPE"

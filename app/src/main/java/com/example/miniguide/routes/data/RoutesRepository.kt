@@ -1,6 +1,6 @@
 package com.example.miniguide.routes.data
 
-import com.example.miniguide.routes.pointSearch.model.PointModel
+import com.example.miniguide.routes.presentation.pointSearch.model.PointModel
 import kotlinx.coroutines.flow.Flow
 
 interface RoutesRepository {

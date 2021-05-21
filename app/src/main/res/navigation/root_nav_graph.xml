@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/routesFragment"
-        android:name="com.example.miniguide.routes.routesChoose.RoutesFragment"
+        android:name="com.example.miniguide.routes.presentation.routesChoose.RoutesFragment"
         android:label="routes_fragment"
         tools:layout="@layout/fragment_routes" />
 
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/pointSearchFragment"
-        android:name="com.example.miniguide.routes.pointSearch.PointSearchFragment"
+        android:name="com.example.miniguide.routes.presentation.pointSearch.PointSearchFragment"
         android:label="point_search_fragment"
         tools:layout="@layout/fragment_point_search" />
 

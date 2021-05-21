@@ -9,14 +9,12 @@ import com.example.miniguide.routes.domain.RoutesInteractor
 import com.example.miniguide.routes.domain.RoutesInteractorImpl
 import com.example.miniguide.common.di.scope.ScreenScope
 import com.example.miniguide.common.di.viewModel.ViewModelKey
-import com.example.miniguide.common.di.viewModel.ViewModelProviderFactory
-import com.example.miniguide.routes.pointSearch.PointSearchViewModel
+import com.example.miniguide.routes.presentation.pointSearch.PointSearchViewModel
 import com.example.miniguide.routes.router.RoutesRouter
-import com.example.miniguide.routes.routesChoose.RoutesViewModel
+import com.example.miniguide.routes.presentation.routesChoose.RoutesViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
-import javax.inject.Provider
 
 @Module
 class RoutesModule {

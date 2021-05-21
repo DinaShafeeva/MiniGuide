@@ -1,4 +1,4 @@
-package com.example.miniguide.routes.routesChoose
+package com.example.miniguide.routes.presentation.routesChoose
 
 import android.os.Bundle
 import android.util.Log
@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.miniguide.R
 import com.example.miniguide.app.di.Injector
-import com.example.miniguide.app.navigator.Navigator
 import com.example.miniguide.common.base.BaseFragment
-import com.example.miniguide.routes.pointSearch.model.PointTypeModel
+import com.example.miniguide.routes.presentation.pointSearch.model.PointTypeModel
 import kotlinx.android.synthetic.main.fragment_routes.*
-import javax.inject.Inject
 
 class RoutesFragment : BaseFragment<RoutesViewModel>() {
 

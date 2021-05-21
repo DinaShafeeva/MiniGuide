@@ -1,4 +1,4 @@
-package com.example.miniguide.routes.pointSearch.adapter
+package com.example.miniguide.routes.presentation.pointSearch.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miniguide.R
-import com.example.miniguide.routes.pointSearch.model.PointModel
+import com.example.miniguide.routes.presentation.pointSearch.model.PointModel
 
 class PointsAdapter(
     private val clickLambda: (PointModel) -> Unit

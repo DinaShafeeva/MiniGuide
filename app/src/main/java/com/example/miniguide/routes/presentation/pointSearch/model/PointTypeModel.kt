@@ -1,4 +1,4 @@
-package com.example.miniguide.routes.pointSearch.model
+package com.example.miniguide.routes.presentation.pointSearch.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
