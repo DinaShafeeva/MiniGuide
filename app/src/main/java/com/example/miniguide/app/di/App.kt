@@ -1,7 +1,6 @@
 package com.example.miniguide.app.di
 
 import android.app.Application
-import com.example.miniguide.di.AppModule
 import com.mapbox.search.MapboxSearchSdk
 import com.mapbox.search.location.DefaultLocationProvider
 

@@ -8,4 +8,7 @@
 
     <string name="start_point">Пункт отправления</string>
     <string name="end_point">Пункт назначения</string>
+    <string name="my_location_text">Мое местоположение</string>
+    <string name="choose_on_map_text">Выбрать на карте</string>
+    <string name="point_text">%1$s, %2$s</string>
 </resources>
