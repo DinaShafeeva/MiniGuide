@@ -9,6 +9,10 @@ import com.example.miniguide.routes.domain.RoutesInteractor
 import com.example.miniguide.routes.domain.RoutesInteractorImpl
 import com.example.miniguide.common.di.scope.ScreenScope
 import com.example.miniguide.common.di.viewModel.ViewModelKey
+import com.example.miniguide.map.data.MapRepository
+import com.example.miniguide.map.data.MapRepositoryImpl
+import com.example.miniguide.map.domain.MapInteractor
+import com.example.miniguide.map.domain.MapInteractorImpl
 import com.example.miniguide.routes.presentation.pointSearch.PointSearchViewModel
 import com.example.miniguide.routes.router.RoutesRouter
 import com.example.miniguide.routes.presentation.routesChoose.RoutesViewModel
