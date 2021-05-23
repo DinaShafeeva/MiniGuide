@@ -36,7 +36,7 @@ abstract class BaseFragment<T : ViewModel> : Fragment() {
     abstract fun initClickListeners()
 
     inline fun <V> Flow<V>.observe(crossinline collector: suspend (V) -> Unit) {
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenStarted {
             collect(collector)
         }
     }

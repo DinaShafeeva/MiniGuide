@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.launch
 
 class RoutesViewModel(
     private val interactor: RoutesInteractor,
@@ -26,6 +27,12 @@ class RoutesViewModel(
 
     fun openPointSearch(pointTypeModel: PointTypeModel) {
         router.openPointSearch(pointTypeModel)
+    }
+
+    fun onCreateRouteClick() {
+        viewModelScope.launch {
+            interactor.createRoute(currentStartPoint.replayCache.last(), currentEndPoint.replayCache.last())
+        }
     }
 
     //transfer to Base VM

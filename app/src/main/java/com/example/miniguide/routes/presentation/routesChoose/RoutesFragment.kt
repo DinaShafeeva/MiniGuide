@@ -40,6 +40,9 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
         tvEndPoint.setOnClickListener {
             viewModel.openPointSearch(PointTypeModel.END_POINT)
         }
+        button.setOnClickListener {
+            viewModel.onCreateRouteClick()
+        }
     }
 
     override fun initViews() {

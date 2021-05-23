@@ -3,11 +3,12 @@ package com.example.miniguide.app.navigator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import com.example.miniguide.R
+import com.example.miniguide.map.router.MapRouter
 import com.example.miniguide.routes.presentation.pointSearch.PointSearchFragment
 import com.example.miniguide.routes.presentation.pointSearch.model.PointTypeModel
 import com.example.miniguide.routes.router.RoutesRouter
 
-class Navigator : RoutesRouter{
+class Navigator : RoutesRouter, MapRouter {
 
     private var navController: NavController? = null
     private var activity: AppCompatActivity? = null
@@ -38,5 +39,9 @@ class Navigator : RoutesRouter{
         if (!popped) {
             activity!!.finish()
         }
+    }
+
+    override fun openRoutesChoose() {
+        navController?.navigate(R.id.action_global_routesFragment)
     }
 }

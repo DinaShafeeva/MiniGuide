@@ -16,7 +16,7 @@ class PlacesSearchEditText @JvmOverloads constructor(
     private var searchRequestTask: SearchRequestTask? = null
     private var resultLimit: Int = 0
 
-    private var searchCallback: SearchSelectionCallback? = null
+    private var searchCallback: SearchSuggestionsCallback? = null
 
     init {
         applyAttributes(attrs)
@@ -70,7 +70,7 @@ class PlacesSearchEditText @JvmOverloads constructor(
         }
     }
 
-    fun setOnSearchCallback(callBack: SearchSelectionCallback) {
+    fun setOnSearchCallback(callBack: SearchSuggestionsCallback) {
         searchCallback = callBack
         initOnTextChangeListener()
     }

@@ -13,16 +13,18 @@ import com.example.miniguide.common.utils.KeyboardUtils
 import com.example.miniguide.routes.presentation.pointSearch.adapter.PointsAdapter
 import com.example.miniguide.routes.presentation.pointSearch.model.PointModel
 import com.example.miniguide.routes.presentation.pointSearch.model.PointTypeModel
-import com.mapbox.search.ResponseInfo
-import com.mapbox.search.SearchSelectionCallback
+import com.mapbox.search.*
 import com.mapbox.search.result.SearchResult
 import com.mapbox.search.result.SearchSuggestion
 import kotlinx.android.synthetic.main.fragment_point_search.*
 import javax.inject.Inject
 
+
 private const val KEY_POINT_TYPE = "KEY_POINT_TYPE"
 
 class PointSearchFragment : BaseFragment<PointSearchViewModel>() {
+
+    private val searchEngine = MapboxSearchSdk.createSearchEngine()
 
     companion object {
         fun getBundle(pointTypeModel: PointTypeModel) = Bundle().apply {
@@ -60,12 +62,24 @@ class PointSearchFragment : BaseFragment<PointSearchViewModel>() {
         when (pointType) {
             PointTypeModel.START_POINT -> {
                 viewModel.currentStartPoint.observe {
-                    tvPointSearcher.setText(context?.getString(R.string.point_text, it.name, it.location))
+                    tvPointSearcher.setText(
+                        context?.getString(
+                            R.string.point_text,
+                            it.name,
+                            it.location
+                        )
+                    )
                 }
             }
             PointTypeModel.END_POINT -> {
                 viewModel.currentEndPoint.observe {
-                    tvPointSearcher.setText(context?.getString(R.string.point_text, it.name, it.location))
+                    tvPointSearcher.setText(
+                        context?.getString(
+                            R.string.point_text,
+                            it.name,
+                            it.location
+                        )
+                    )
                 }
             }
         }
@@ -91,50 +105,61 @@ class PointSearchFragment : BaseFragment<PointSearchViewModel>() {
             }
         }
 
-        tvPointSearcher.setOnSearchCallback(object : SearchSelectionCallback {
+        tvPointSearcher.setOnSearchCallback(object : SearchSuggestionsCallback {
 
             override fun onSuggestions(
                 suggestions: List<SearchSuggestion>,
                 responseInfo: ResponseInfo
-            ) {
-                val points = mutableListOf<PointModel>()
-                suggestions.forEach {
-                    points.add(
-                        PointModel(
-                            it.name,
-                            it.address?.locality ?: ""
-                        )
-                    )
-                }
-                adapter?.updateData(points)
-            }
-
-            override fun onResult(
-                suggestion: SearchSuggestion,
-                result: SearchResult,
-                responseInfo: ResponseInfo
-            ) {
-            }
-
-            override fun onCategoryResult(
-                suggestion: SearchSuggestion,
-                results: List<SearchResult>,
-                responseInfo: ResponseInfo
-            ) {
-            }
+            ) { adapter?.updateData(suggestions) }
 
             override fun onError(e: Exception) {}
         })
     }
 
-    private fun onItemClick(data: PointModel) {
-        when(pointType){
-            PointTypeModel.START_POINT -> {
-                viewModel.setStartPoint(data)
-            }
-            PointTypeModel.END_POINT -> {
-                viewModel.setEndPoint(data)
+    private fun onItemClick(data: SearchSuggestion) {
+        searchEngine.select(data, selectionCallback)
+    }
+
+    private val selectionCallback = object : SearchSelectionCallback {
+        override fun onCategoryResult(
+            suggestion: SearchSuggestion,
+            results: List<SearchResult>,
+            responseInfo: ResponseInfo
+        ) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onError(e: Exception) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onResult(
+            suggestion: SearchSuggestion,
+            result: SearchResult,
+            responseInfo: ResponseInfo
+        ) {
+            val point = PointModel(
+                suggestion.name,
+                suggestion.address?.locality ?: "",
+                result.coordinate?.latitude() ?: 0.0,
+                result.coordinate?.longitude() ?: 0.0
+            )
+            when(pointType){
+                PointTypeModel.START_POINT -> {
+                    viewModel.setStartPoint(point)
+                }
+                PointTypeModel.END_POINT -> {
+                    viewModel.setEndPoint(point)
+                }
             }
         }
+
+        override fun onSuggestions(
+            suggestions: List<SearchSuggestion>,
+            responseInfo: ResponseInfo
+        ) {
+            TODO("Not yet implemented")
+        }
+
     }
 }

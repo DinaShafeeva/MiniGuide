@@ -13,6 +13,7 @@ import com.example.miniguide.R
 import com.example.miniguide.app.di.Injector
 import com.example.miniguide.common.base.BaseFragment
 import com.example.miniguide.common.extension.askPermissionsSafely
+import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.location.*
 import com.mapbox.mapboxsdk.location.modes.CameraMode
@@ -20,11 +21,16 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.launch
 
 
 class MapFragment : BaseFragment<MapViewModel>() {
+
+    private var navigationMapRoute: NavigationMapRoute? = null
+    private var mapboxMap: MapboxMap? = null
+    private var routes: List<DirectionsRoute>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,11 +47,11 @@ class MapFragment : BaseFragment<MapViewModel>() {
     }
 
     override fun subscribe() {
-        TODO("Not yet implemented")
+
     }
 
     override fun inject() {
-       Injector.plusMapComponent(this).inject(this)
+        Injector.plusMapComponent(this).inject(this)
     }
 
     override fun initViews() {
@@ -54,7 +60,7 @@ class MapFragment : BaseFragment<MapViewModel>() {
 
     override fun initClickListeners() {
         back_to_camera_tracking_mode.setOnClickListener {
-//            view?.findNavController().navigate(R.id.action_global_routesFragment)
+            viewModel.onRoutesClick()
         }
     }
 
@@ -62,7 +68,24 @@ class MapFragment : BaseFragment<MapViewModel>() {
         mapView?.getMapAsync { mapboxMap ->
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
                 initLocationComponent(mapboxMap, it)
+                this.mapboxMap = mapboxMap
+                initRoute()
             }
+        }
+
+    }
+
+    private fun initRoute() {
+        routes?.let {
+            if (navigationMapRoute != null) {
+                navigationMapRoute?.removeRoute()
+            } else {
+                mapboxMap?.let {
+                    navigationMapRoute =
+                        NavigationMapRoute(null, mapView, it, R.style.NavigationMapRoute)
+                }
+            }
+            navigationMapRoute?.addRoutes(it)
         }
     }
 
