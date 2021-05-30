@@ -1,7 +1,6 @@
 package com.example.miniguide.routes.presentation.routesChoose
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import com.example.miniguide.R
 import com.example.miniguide.app.di.Injector
 import com.example.miniguide.common.base.BaseFragment
 import com.example.miniguide.routes.presentation.pointSearch.model.PointTypeModel
+import kotlinx.android.synthetic.main.activity_root.*
 import kotlinx.android.synthetic.main.fragment_routes.*
 
 class RoutesFragment : BaseFragment<RoutesViewModel>() {
@@ -43,6 +43,7 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
         button.setOnClickListener {
             viewModel.onCreateRouteClick()
         }
+        activity?.resetBtn?.setOnClickListener { viewModel.back() }
     }
 
     override fun initViews() {

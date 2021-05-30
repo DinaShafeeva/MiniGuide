@@ -31,6 +31,7 @@ class MapFragment : BaseFragment<MapViewModel>() {
     private var navigationMapRoute: NavigationMapRoute? = null
     private var mapboxMap: MapboxMap? = null
     private var routes: List<DirectionsRoute>? = null
+    override var isResetBtnVisible: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,

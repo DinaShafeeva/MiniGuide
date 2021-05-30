@@ -6,11 +6,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
+import kotlinx.android.synthetic.main.activity_root.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 abstract class BaseFragment<T : ViewModel> : Fragment() {
+    open var isResetBtnVisible = true
 
     @Inject
     protected open lateinit var viewModel: T
@@ -25,6 +27,12 @@ abstract class BaseFragment<T : ViewModel> : Fragment() {
         subscribe()
         initViews()
         initClickListeners()
+        initResetBtn()
+    }
+
+    private fun initResetBtn() {
+        if (isResetBtnVisible) activity?.resetBtn?.visibility = View.VISIBLE
+        else activity?.resetBtn?.visibility = View.GONE
     }
 
     abstract fun subscribe()

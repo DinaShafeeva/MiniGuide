@@ -14,4 +14,14 @@
         app:navGraph="@navigation/root_nav_graph"
         app:defaultNavHost="true" />
 
+    <ImageButton
+        android:id="@+id/resetBtn"
+        android:layout_width="@dimen/toolbar_button_size"
+        android:layout_height="@dimen/toolbar_button_size"
+        android:backgroundTint="@android:color/transparent"
+        android:padding="@dimen/default_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

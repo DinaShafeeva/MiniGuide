@@ -35,6 +35,10 @@ class RoutesViewModel(
         }
     }
 
+    fun back() {
+        router.back()
+    }
+
     //transfer to Base VM
     fun <T> Flow<T>.share() = shareIn(viewModelScope, started = SharingStarted.Eagerly, replay = 1)
 }
