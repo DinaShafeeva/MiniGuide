@@ -94,9 +94,10 @@ class MapFragment : BaseFragment<MapViewModel>() {
     private fun initLocationComponent(mapboxMap: MapboxMap, style: Style) {
         val customLocationComponentOptions = LocationComponentOptions.builder(requireContext())
             .elevation(5f)
+            .foregroundDrawable(R.drawable.ic_marker)
+            .backgroundDrawable(R.drawable.ic_marker)
             .accuracyAlpha(.6f)
             .accuracyColor(Color.RED)
-            .foregroundDrawable(R.drawable.ic_launcher_foreground)
             .build()
 
         mapboxMap.apply {
