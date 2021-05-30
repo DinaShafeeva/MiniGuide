@@ -47,7 +47,7 @@ class MapFragment : BaseFragment<MapViewModel>() {
     }
 
     override fun subscribe() {
-
+        viewModel.currentRoute.observe { routes = it }
     }
 
     override fun inject() {
