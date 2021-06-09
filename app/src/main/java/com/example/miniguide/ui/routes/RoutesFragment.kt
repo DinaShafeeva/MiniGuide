@@ -1,6 +1,7 @@
 package com.example.miniguide.ui.routes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,16 +25,16 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
         return inflater.inflate(R.layout.fragment_routes, container, false)
     }
 
-//    override fun subscribe() {
-//        viewModel.currentStartPoint.observe {
-//            Log.e("currentStartPoint - ", it.toString())
-//            tvStartPoint.text = context?.getString(R.string.point_text, it.name, it.location)
-//        }
-//        viewModel.currentEndPoint.observe {
-//            Log.e("currentEndPoint - ", it.toString())
-//            tvEndPoint.text = context?.getString(R.string.point_text, it.name, it.location)
-//        }
-//    }
+    override fun subscribe() {
+        viewModel.currentStartPoint.observe {
+            Log.e("currentStartPoint - ", it.toString())
+            tvStartPoint.text = context?.getString(R.string.point_text, it.name, it.location)
+        }
+        viewModel.currentEndPoint.observe {
+            Log.e("currentEndPoint - ", it.toString())
+            tvEndPoint.text = context?.getString(R.string.point_text, it.name, it.location)
+        }
+    }
 
     override fun initClickListeners() {
         tvStartPoint.setOnClickListener {
@@ -48,8 +49,5 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
     }
 
     override fun initViews() {
-    }
-
-    override fun subscribe() {
     }
 }
