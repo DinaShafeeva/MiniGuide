@@ -1,5 +1,6 @@
 package com.example.miniguide.ui.search
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -43,13 +44,18 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        pointType = requireArguments()[KEY_POINT_TYPE] as PointTypeModel
+    }
+
     override fun initViews() {
         tvPointSearcher.requestFocus()
         KeyboardUtils.showKeyboardImplicit(tvPointSearcher)
         setAdapter()
         initPointSearcher()
         //viewModel = SearchViewModel()
-        viewModel.view = view
+//        viewModel.view = view
     }
 
     override fun subscribe() {

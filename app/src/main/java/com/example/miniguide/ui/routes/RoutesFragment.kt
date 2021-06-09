@@ -1,20 +1,21 @@
 package com.example.miniguide.ui.routes
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.fragment.app.viewModels
 import com.example.miniguide.R
+import com.example.miniguide.data.PointTypeModel
 import com.example.miniguide.ui.base.BaseFragment
+import com.example.miniguide.ui.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_routes.*
 
 @AndroidEntryPoint
 class RoutesFragment : BaseFragment<RoutesViewModel>() {
-//    override lateinit var viewModel: RoutesViewModel
+    //    override lateinit var viewModel: RoutesViewModel
+    private val viewModel: RoutesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,11 +37,13 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
 
     override fun initClickListeners() {
         tvStartPoint.setOnClickListener {
-            Log.d("startPoint", "start")
-            view?.findNavController()?.navigate(R.id.searchFragment)
+            viewModel.openPointSearch(PointTypeModel.START_POINT)
         }
         tvEndPoint.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.searchFragment)
+            viewModel.openPointSearch(PointTypeModel.END_POINT)
+        }
+        button.setOnClickListener {
+            viewModel.onCreateRouteClick()
         }
     }
 

@@ -9,6 +9,8 @@ interface RoutesInteractor {
 
     suspend fun setEndPoint(point: PointModel)
 
+    suspend fun createRoute(startPoint: PointModel, endPoint: PointModel)
+
     fun startPointFlow(): Flow<PointModel>
 
     fun endPointFlow(): Flow<PointModel>
