@@ -1,7 +1,10 @@
 package com.example.miniguide.ui.search
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.miniguide.R
 import com.example.miniguide.data.PointModel
 import com.example.miniguide.domain.routes.RoutesInteractor
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +17,7 @@ import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
     private val interactor: RoutesInteractor
+
 ) : ViewModel() {
 
     val currentStartPoint = interactor.startPointFlow()
@@ -28,13 +32,20 @@ class SearchViewModel @Inject constructor(
     fun setStartPoint(point: PointModel) {
         viewModelScope.launch {
             interactor.setStartPoint(point)
+            goBack()
         }
     }
 
     fun setEndPoint(point: PointModel) {
         viewModelScope.launch {
             interactor.setEndPoint(point)
+            goBack()
         }
+    }
+
+    var view: View? = null
+    private fun goBack() {
+        view?.findNavController()?.navigate(R.id.routesFragment)
     }
 
     //transfer to Base VM

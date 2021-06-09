@@ -13,18 +13,30 @@ import androidx.navigation.findNavController
 import com.example.miniguide.R
 import com.example.miniguide.helper.askPermissionsSafely
 import com.example.miniguide.ui.base.BaseFragment
+import com.mapbox.android.gestures.MoveGestureDetector
+import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.location.*
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.search.*
+import com.mapbox.search.result.SearchResult
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.launch
 
 
 class MapFragment : BaseFragment<MapViewModel>() {
+
+    private lateinit var categorySearchEngine: CategorySearchEngine
+    private lateinit var searchRequestTask: SearchRequestTask
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        viewModel = viewModel {  }
+//    }
 
     private val onLocationClickListener = OnLocationClickListener {
         Log.e("Callback - ", " OnLocationClickListener")
@@ -42,6 +54,20 @@ class MapFragment : BaseFragment<MapViewModel>() {
 
     }
 
+    private val searchCallback: SearchCallback = object : SearchCallback {
+
+        override fun onResults(results: List<SearchResult>, responseInfo: ResponseInfo) {
+            if (results.isEmpty()) {
+                Log.i("SearchApiExample", "No category search results")
+            } else {
+                Log.i("SearchApiExample", "Category search results: $results")
+            }
+        }
+
+        override fun onError(e: Exception) {
+            Log.i("SearchApiExample", "Search error", e)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,6 +81,13 @@ class MapFragment : BaseFragment<MapViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         requestMapPermissions()
         mapView?.onCreate(savedInstanceState)
+        categorySearchEngine = MapboxSearchSdk.createCategorySearchEngine()
+
+        searchRequestTask = categorySearchEngine.search(
+            "cafe",
+            CategorySearchOptions(limit = 3, proximity = Point.fromLngLat(-122.08400000000002, 37.421998333333335)),
+            searchCallback
+        )
     }
 
     private fun initMapView() {
@@ -71,7 +104,8 @@ class MapFragment : BaseFragment<MapViewModel>() {
             .elevation(5f)
             .accuracyAlpha(.6f)
             .accuracyColor(Color.RED)
-            .foregroundDrawable(R.drawable.ic_launcher_foreground)
+            .foregroundDrawable(R.drawable.ic_location)
+            .backgroundDrawable(R.drawable.ic_location)
             .build()
 
         mapboxMap.apply {

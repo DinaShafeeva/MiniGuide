@@ -1,6 +1,5 @@
 package com.example.miniguide.ui.search
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miniguide.R
-import com.example.miniguide.data.PointModel
+import com.mapbox.search.result.SearchSuggestion
 
-class PointsAdapter (
-    private val clickLambda: (PointModel) -> Unit
+class PointsAdapter(
+    private val clickLambda: (SearchSuggestion) -> Unit
 ) : RecyclerView.Adapter<PointsAdapter.LocationViewHolder>() {
 
-    private val data = mutableListOf<PointModel>()
+    private val data = mutableListOf<SearchSuggestion>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = LocationViewHolder(
         LayoutInflater
@@ -37,7 +36,7 @@ class PointsAdapter (
         holder.itemView.setOnClickListener(null)
     }
 
-    fun updateData(newData: List<PointModel>?) {
+    fun updateData(newData: List<SearchSuggestion>?) {
         val diffCallback = DiffUtilCallback(data, newData ?: emptyList())
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         data.clear()
@@ -47,13 +46,13 @@ class PointsAdapter (
 
     private inner class DiffUtilCallback(
 
-        private val oldList: List<PointModel>,
-        private val newList: List<PointModel>
+        private val oldList: List<SearchSuggestion>,
+        private val newList: List<SearchSuggestion>
 
     ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-            oldList[oldItemPosition].location == newList[newItemPosition].location
+            oldList[oldItemPosition].id == newList[newItemPosition].id
 
         override fun getOldListSize() = oldList.size
 
@@ -65,20 +64,24 @@ class PointsAdapter (
             val newItem = newList[newItemPosition]
 
             return oldItem.name == newItem.name &&
-                    oldItem.location == newItem.location
+                    oldItem.id == newItem.id
         }
     }
 
     inner class LocationViewHolder(
         itemView: View,
-        private val clickLambda: (PointModel) -> Unit,
+        private val clickLambda: (SearchSuggestion) -> Unit,
     ) : RecyclerView.ViewHolder(itemView) {
 
         private val point: TextView = itemView.findViewById(R.id.tvPoint)
 
-        fun bind(pointData: PointModel) {
+        fun bind(pointData: SearchSuggestion) {
             point.text =
-                itemView.context.getString(R.string.point_text, pointData.name, pointData.location)
+                itemView.context.getString(
+                    R.string.point_text,
+                    pointData.name,
+                    pointData.address?.locality.toString()
+                )
             itemView.setOnClickListener { clickLambda.invoke(pointData) }
         }
     }

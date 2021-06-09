@@ -9,4 +9,6 @@
     <string name="choose_on_map_text">Выберите на карте</string>
     <string name="my_location_text">Мое положение</string>
     <string name="point_text">%1$s, %2$s</string>
+    <string name="content_description">image</string>
+    <string name="get_routes">Построить маршрут</string>
 </resources>

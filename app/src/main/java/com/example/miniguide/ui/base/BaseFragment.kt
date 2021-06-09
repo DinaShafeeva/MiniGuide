@@ -9,12 +9,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-abstract class  BaseFragment<T : ViewModel> : Fragment() {
-
-    protected abstract var viewModel: T
+abstract class BaseFragment<T : ViewModel> : Fragment() {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    protected open lateinit var viewModel: T
+
+//    @Inject
+//    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -29,11 +30,11 @@ abstract class  BaseFragment<T : ViewModel> : Fragment() {
 
     abstract fun subscribe()
 
-    inline fun <reified T : ViewModel> viewModel(body: T.() -> Unit): T {
-        val vm = ViewModelProvider(this, viewModelFactory).get(T::class.java)
-        vm.body()
-        return vm
-    }
+//    inline fun <reified T : ViewModel> viewModel(body: T.() -> Unit): T {
+//        val vm = ViewModelProvider(this, viewModelFactory).get(T::class.java)
+//        vm.body()
+//        return vm
+//    }
     inline fun <V> Flow<V>.observe(crossinline collector: suspend (V) -> Unit) {
         lifecycleScope.launchWhenResumed {
             collect(collector)

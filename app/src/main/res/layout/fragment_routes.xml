@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/default_margin"
     android:orientation="vertical"
     tools:context=".ui.routes.RoutesFragment">
 
@@ -23,5 +24,20 @@
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
         android:hint="@string/end_point" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:background="@drawable/background_oval"
+        android:contentDescription="@string/content_description"
+        android:drawableStart="@drawable/ic_route"
+        android:paddingHorizontal="@dimen/large_margin"
+        android:paddingVertical="@dimen/very_small_margin"
+        android:text="@string/get_routes"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/large_text_size" />
 
 </LinearLayout>
