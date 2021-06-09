@@ -1,20 +1,15 @@
 package com.example.miniguide.app
 
 import android.app.Application
-import com.example.miniguide.di.AppModule
 import com.mapbox.search.MapboxSearchSdk
 import com.mapbox.search.location.DefaultLocationProvider
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class App : Application() {
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder()
-            .appModule(AppModule(this))
-            .build()
 
         MapboxSearchSdk.initialize(
             application = this,

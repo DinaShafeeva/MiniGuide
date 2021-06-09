@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.example.miniguide.R
 import com.example.miniguide.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_routes.*
 
-
+@AndroidEntryPoint
 class RoutesFragment : BaseFragment<RoutesViewModel>() {
-    override lateinit var viewModel: RoutesViewModel
+//    override lateinit var viewModel: RoutesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

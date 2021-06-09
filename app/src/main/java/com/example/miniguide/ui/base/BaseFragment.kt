@@ -2,6 +2,7 @@ package com.example.miniguide.ui.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -11,8 +12,7 @@ import javax.inject.Inject
 
 abstract class BaseFragment<T : ViewModel> : Fragment() {
 
-    @Inject
-    protected open lateinit var viewModel: T
+//    protected val viewModel: T by viewModels()
 
 //    @Inject
 //    lateinit var viewModelFactory: ViewModelProvider.Factory

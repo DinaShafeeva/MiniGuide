@@ -1,10 +1,13 @@
 package com.example.miniguide.ui.routes
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
-class RoutesViewModel @Inject constructor(
+@HiltViewModel
+class RoutesViewModel  @Inject constructor(
 //    private val interactor: RoutesInteractor,
 //    private val router: RoutesRouter
 ) : ViewModel() {

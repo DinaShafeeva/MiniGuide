@@ -23,11 +23,12 @@ import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.search.*
 import com.mapbox.search.result.SearchResult
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class MapFragment : BaseFragment<MapViewModel>() {
 
     private lateinit var categorySearchEngine: CategorySearchEngine
@@ -179,7 +180,7 @@ class MapFragment : BaseFragment<MapViewModel>() {
         mapView?.onDestroy()
     }
 
-    override lateinit var viewModel: MapViewModel
+//    override lateinit var viewModel: MapViewModel
 
     override fun initClickListeners() {
         toRoutesBtn.setOnClickListener{
