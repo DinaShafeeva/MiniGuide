@@ -34,11 +34,6 @@ class MapFragment : BaseFragment<MapViewModel>() {
     private lateinit var categorySearchEngine: CategorySearchEngine
     private lateinit var searchRequestTask: SearchRequestTask
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        viewModel = viewModel {  }
-//    }
-
     private val onLocationClickListener = OnLocationClickListener {
         Log.e("Callback - ", " OnLocationClickListener")
     }
@@ -55,20 +50,20 @@ class MapFragment : BaseFragment<MapViewModel>() {
 
     }
 
-    private val searchCallback: SearchCallback = object : SearchCallback {
-
-        override fun onResults(results: List<SearchResult>, responseInfo: ResponseInfo) {
-            if (results.isEmpty()) {
-                Log.i("SearchApiExample", "No category search results")
-            } else {
-                Log.i("SearchApiExample", "Category search results: $results")
-            }
-        }
-
-        override fun onError(e: Exception) {
-            Log.i("SearchApiExample", "Search error", e)
-        }
-    }
+//    private val searchCallback: SearchCallback = object : SearchCallback {
+//
+//        override fun onResults(results: List<SearchResult>, responseInfo: ResponseInfo) {
+//            if (results.isEmpty()) {
+//                Log.i("SearchApiExample", "No category search results")
+//            } else {
+//                Log.i("SearchApiExample", "Category search results: $results")
+//            }
+//        }
+//
+//        override fun onError(e: Exception) {
+//            Log.i("SearchApiExample", "Search error", e)
+//        }
+//    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -82,13 +77,13 @@ class MapFragment : BaseFragment<MapViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         requestMapPermissions()
         mapView?.onCreate(savedInstanceState)
-        categorySearchEngine = MapboxSearchSdk.createCategorySearchEngine()
-
-        searchRequestTask = categorySearchEngine.search(
-            "cafe",
-            CategorySearchOptions(limit = 3, proximity = Point.fromLngLat(-122.08400000000002, 37.421998333333335)),
-            searchCallback
-        )
+//        categorySearchEngine = MapboxSearchSdk.createCategorySearchEngine()
+//
+//        searchRequestTask = categorySearchEngine.search(
+//            "cafe",
+//            CategorySearchOptions(limit = 3, proximity = Point.fromLngLat(-122.08400000000002, 37.421998333333335)),
+//            searchCallback
+//        )
     }
 
     private fun initMapView() {

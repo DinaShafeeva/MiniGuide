@@ -1,22 +1,22 @@
 package com.example.miniguide.ui.routes
 
-import androidx.hilt.lifecycle.ViewModelInject
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.miniguide.data.PointTypeModel
 import com.example.miniguide.domain.routes.RoutesInteractor
 import com.example.miniguide.ui.base.Navigator
+import com.mapbox.search.result.SearchResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.shareIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RoutesViewModel  @Inject constructor(
+class RoutesViewModel @Inject constructor(
     private val interactor: RoutesInteractor,
     private val navigator: Navigator
 ) : ViewModel() {
@@ -33,10 +33,12 @@ class RoutesViewModel  @Inject constructor(
         navigator.openPointSearch(pointTypeModel)
     }
 
-    fun onCreateRouteClick() {
-        viewModelScope.launch {
-            interactor.createRoute(currentStartPoint.replayCache.last(), currentEndPoint.replayCache.last())
-        }
+    fun onCreateRouteClick(list: List<SearchResult>) {
+        navigator.back()
+        Log.d("listOfSR", list.toString())
+//        viewModelScope.launch {
+//            interactor.createRoute(currentStartPoint.replayCache.last(), currentEndPoint.replayCache.last())
+//        }
     }
 
     //transfer to Base VM
