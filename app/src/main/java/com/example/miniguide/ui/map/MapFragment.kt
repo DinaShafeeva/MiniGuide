@@ -17,13 +17,11 @@ import com.example.miniguide.helper.askPermissionsSafely
 import com.example.miniguide.ui.base.BaseFragment
 import com.example.miniguide.ui.base.Navigator
 import com.mapbox.api.directions.v5.DirectionsCriteria
-import com.mapbox.api.directions.v5.MapboxDirections
-import com.mapbox.api.directions.v5.models.DirectionsResponse
 import com.mapbox.api.directions.v5.models.DirectionsRoute
-import com.mapbox.core.constants.Constants.PRECISION_6
+import com.mapbox.api.optimization.v1.MapboxOptimization
+import com.mapbox.api.optimization.v1.models.OptimizationResponse
 import com.mapbox.geojson.Feature
 import com.mapbox.geojson.FeatureCollection
-import com.mapbox.geojson.LineString
 import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
@@ -109,12 +107,6 @@ class MapFragment : BaseFragment<MapViewModel>() {
                     initSource(style)
                     initLayers(style)
 
-                    Toast.makeText(
-                        requireContext(),
-                        "Ща как построю маршрут",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
                     createRoute(pointsList)
                 }
             }
@@ -151,7 +143,7 @@ class MapFragment : BaseFragment<MapViewModel>() {
         routeLayer.setProperties(
             lineCap(Property.LINE_CAP_ROUND),
             lineJoin(Property.LINE_JOIN_ROUND),
-            lineWidth(5f),
+            lineWidth(3f),
             lineColor(Color.parseColor("#80C6B5E4"))
         )
         loadedMapStyle.addLayer(routeLayer)
@@ -301,10 +293,18 @@ class MapFragment : BaseFragment<MapViewModel>() {
                     if (index % 2 == 0) {
                         longitude = it
                     } else {
-                        pointsList.add(Point.fromLngLat(longitude, it))
+                        if (!pointsList.any { point ->
+                            (point.longitude() == longitude) && (point.latitude() == it)
+                        }) pointsList.add(Point.fromLngLat(longitude, it))
                     }
                     index++
                 }
+                pointsList.add(
+                    Point.fromLngLat(
+                        pointsArray[pointsArray.size - 2],
+                        pointsArray[pointsArray.size - 1]
+                    )
+                )
                 pointsList.distinct()
                 Log.d("pointsList", pointsList.toString())
             }
@@ -316,12 +316,12 @@ class MapFragment : BaseFragment<MapViewModel>() {
     private val RED_PIN_ICON_ID = "red-pin-icon-id"
 
     fun createRoute(points: List<Point>) {
-        buildClient(points).enqueueCall(object : Callback<DirectionsResponse> {
-            override fun onResponse(
-                call: Call<DirectionsResponse>,
-                response: Response<DirectionsResponse>
-            ) {
+        buildClient(points).enqueueCall(object : Callback<OptimizationResponse> {
 
+            override fun onResponse(
+                call: Call<OptimizationResponse>,
+                response: Response<OptimizationResponse>
+            ) {
 
                 if (response.body() == null) {
                     Log.d(
@@ -329,46 +329,29 @@ class MapFragment : BaseFragment<MapViewModel>() {
                         "No routes found, make sure you set the right user and access token."
                     )
                     return
-                } else if (response.body()!!.routes().size < 1) {
+                } else if (response.body()!!.trips()?.isEmpty() == true) {
                     Log.d("onResponse", "No routes found")
                     return
                 }
 
-                currentRoute = response.body()?.routes()?.get(0)
-
-                if (navigationMapRoute != null) {
-                    navigationMapRoute?.removeRoute()
-                } else {
-                    navigationMapRoute = NavigationMapRoute(
-                        null,
-                        mapView,
-                        mapboxMap!!,
-                        R.style.NavigationMapRoute
-                    )
+               // currentRoute = response.body()?.routes()?.get(0)
+                val optimizedRoute = response.body()!!.trips()!![0]
+                if (mapboxMap != null) {
+                    if (navigationMapRoute != null) {
+                        navigationMapRoute?.removeRoute()
+                    } else {
+                        navigationMapRoute = NavigationMapRoute(
+                            null,
+                            mapView,
+                            mapboxMap!!,
+                            R.style.NavigationMapRoute
+                        )
+                    }
+                    navigationMapRoute?.addRoute(optimizedRoute)
                 }
-                navigationMapRoute?.addRoute(currentRoute)
-
-//                if (mapboxMap != null) {
-//                    mapboxMap!!.getStyle { style -> // Retrieve and update the source designated for showing the directions route
-//                        val source = style.getSourceAs<GeoJsonSource>(ROUTE_SOURCE_ID)
-//
-//                        // Create a LineString with the directions route's geometry and
-//                        // reset the GeoJSON source for the route LineLayer source
-//                        source?.setGeoJson(
-//                            LineString.fromPolyline(
-//                                currentRoute!!.geometry()!!,
-//                                PRECISION_6
-//                            )
-//                        )
-//
-//
-//                    }
-//                }
-                Log.d("onResponse", response.body().toString())
-
             }
 
-            override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
+            override fun onFailure(call: Call<OptimizationResponse>, t: Throwable) {
                 Log.d("onFailure", t.message.orEmpty())
             }
 
@@ -381,19 +364,21 @@ class MapFragment : BaseFragment<MapViewModel>() {
 
 //    fun selectDirectionsRouteFlow(): Flow<List<DirectionsRoute>> = route
 
-    private fun buildClient(points: List<Point>): MapboxDirections {
+    private fun buildClient(points: List<Point>): MapboxOptimization {
         val pointsSize = points.size
-        val client = MapboxDirections.builder()
-            .origin(points[0])
-            .destination(points[pointsSize - 1])
+        val client = MapboxOptimization.builder()
+            .source("first")
+            .destination("last")
+            .coordinates(pointsList)
+            .roundTrip(false)
             .steps(true)
             .overview(DirectionsCriteria.OVERVIEW_FULL)
             .profile(DirectionsCriteria.PROFILE_WALKING)
             .accessToken(getString(R.string.mapbox_access_token))
 
-        for (i in 1 until pointsSize) {
-            client.addWaypoint(points[i])
-        }
+//        for (i in 1 until pointsSize) {
+//            client.addWaypoint(points[i])
+//        }
         return client.build()
     }
 

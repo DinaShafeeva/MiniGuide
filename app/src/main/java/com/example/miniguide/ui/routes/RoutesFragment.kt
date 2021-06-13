@@ -37,13 +37,14 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
             Log.e("currentStartPoint - ", it.toString())
             tvStartPoint.text = context?.getString(R.string.point_text, it.name, it.location)
             startPoint = it
+            pointList.clear()
             getPlaces()
         }
         viewModel.currentEndPoint.observe {
             Log.e("currentEndPoint - ", it.toString())
             tvEndPoint.text = context?.getString(R.string.point_text, it.name, it.location)
             endPoint = it
-          //  getPlaces()
+            getPlaces()
         }
     }
 
@@ -82,7 +83,7 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
                 Log.i("SearchApiExample", "No category search results")
             } else {
                 Log.i("SearchApiExample", "Category search results: $results")
-                pointList.addAll(results)
+                pointList.addAll(results.take(5))
             }
         }
 
