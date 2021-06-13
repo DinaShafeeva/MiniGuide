@@ -26,7 +26,7 @@ buildscript {
 
         navControllerVersion = '2.3.5'
 
-        mapBoxMapVersion = '9.2.1'
+        mapBoxMapVersion = '9.6.1'
         mapBoxNavigationVersion = '0.42.6'
     }
     dependencies {

@@ -79,8 +79,7 @@ class PointsAdapter(
             point.text =
                 itemView.context.getString(
                     R.string.point_text,
-                    pointData.name,
-                    pointData.address?.locality.toString()
+                    pointData.name
                 )
             itemView.setOnClickListener { clickLambda.invoke(pointData) }
         }

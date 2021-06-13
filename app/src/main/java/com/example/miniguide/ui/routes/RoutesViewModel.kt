@@ -34,7 +34,17 @@ class RoutesViewModel @Inject constructor(
     }
 
     fun onCreateRouteClick(list: List<SearchResult>) {
-        navigator.back()
+        val array: DoubleArray = DoubleArray(list.size * 2 + 4)
+        array.distinct()
+        list.map {
+            array[2 * list.indexOf(it)] = it.coordinate?.longitude() ?: 0.0
+            array[2 * list.indexOf(it) + 1] = it.coordinate?.latitude() ?: 0.0
+        }
+        array[2*list.size] = currentStartPoint.replayCache.last().longitude
+        array[2*list.size+1] = currentStartPoint.replayCache.last().latitude
+        array[2*list.size+2] = currentEndPoint.replayCache.last().longitude
+        array[2*list.size+3] = currentEndPoint.replayCache.last().latitude
+        navigator.openMap(array)
         Log.d("listOfSR", list.toString())
 //        viewModelScope.launch {
 //            interactor.createRoute(currentStartPoint.replayCache.last(), currentEndPoint.replayCache.last())

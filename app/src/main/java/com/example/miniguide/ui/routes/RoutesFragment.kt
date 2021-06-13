@@ -43,6 +43,7 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
             Log.e("currentEndPoint - ", it.toString())
             tvEndPoint.text = context?.getString(R.string.point_text, it.name, it.location)
             endPoint = it
+          //  getPlaces()
         }
     }
 
@@ -54,7 +55,7 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
             viewModel.openPointSearch(PointTypeModel.END_POINT)
         }
         button.setOnClickListener {
-            viewModel.onCreateRouteClick(startPointList)
+            viewModel.onCreateRouteClick(pointList)
         }
     }
 
@@ -73,7 +74,7 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
         )
     }
 
-    var startPointList: List<SearchResult> = emptyList()
+    var pointList: MutableList<SearchResult> = emptyList<SearchResult>().toMutableList()
     private val searchCallback: SearchCallback = object : SearchCallback {
 
         override fun onResults(results: List<SearchResult>, responseInfo: ResponseInfo) {
@@ -81,7 +82,7 @@ class RoutesFragment : BaseFragment<RoutesViewModel>() {
                 Log.i("SearchApiExample", "No category search results")
             } else {
                 Log.i("SearchApiExample", "Category search results: $results")
-                startPointList = results
+                pointList.addAll(results)
             }
         }
 
