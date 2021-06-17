@@ -356,16 +356,9 @@ class MapFragment : BaseFragment<MapViewModel>() {
             }
 
         })
-        //   initRoute()
-//            .executeCall().body()?.let {
-//            routes = it.routes()
-//        }
     }
 
-//    fun selectDirectionsRouteFlow(): Flow<List<DirectionsRoute>> = route
-
     private fun buildClient(points: List<Point>): MapboxOptimization {
-        val pointsSize = points.size
         val client = MapboxOptimization.builder()
             .source("first")
             .destination("last")
@@ -376,23 +369,6 @@ class MapFragment : BaseFragment<MapViewModel>() {
             .profile(DirectionsCriteria.PROFILE_WALKING)
             .accessToken(getString(R.string.mapbox_access_token))
 
-//        for (i in 1 until pointsSize) {
-//            client.addWaypoint(points[i])
-//        }
         return client.build()
     }
-
-//    private fun initRoute() {
-//        routes?.let {
-//            if (navigationMapRoute != null) {
-//                navigationMapRoute?.removeRoute()
-//            } else {
-//                mapboxMap?.let {
-//                    navigationMapRoute =
-//                        NavigationMapRoute(null, mapView, it, R.style.NavigationMapRoute)
-//                }
-//            }
-//            navigationMapRoute?.addRoutes(it)
-//        }
-//    }
 }

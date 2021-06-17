@@ -86,10 +86,8 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
     private fun initPointSearcher() {
         when(pointType){
             PointTypeModel.START_POINT -> {
-                //
             }
             PointTypeModel.END_POINT -> {
-                myLocation.visibility = View.GONE
             }
         }
 
