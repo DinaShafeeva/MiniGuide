@@ -3,4 +3,9 @@
     <color name="colorPrimary">#64B5F6</color>
     <color name="colorPrimaryDark">#4015A1</color>
     <color name="colorAccent">#FDD835</color>
+    
+    <color name="colorHintLocation">#8A8382</color>
+    <color name="colorLightPurple">#8A83FF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorSeparator">#DADAE0</color>
 </resources>

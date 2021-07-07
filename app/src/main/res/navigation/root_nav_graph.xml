@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mapFragment">
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.miniguide.map.presentation.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+
+    <action
+        android:id="@+id/action_global_mapFragment"
+        app:destination="@id/mapFragment" />
+
+    <fragment
+        android:id="@+id/routesFragment"
+        android:name="com.example.miniguide.routes.presentation.routesChoose.RoutesFragment"
+        android:label="routes_fragment"
+        tools:layout="@layout/fragment_routes" />
+
+    <action
+        android:id="@+id/action_global_routesFragment"
+        app:destination="@id/routesFragment" />
+
+    <fragment
+        android:id="@+id/pointSearchFragment"
+        android:name="com.example.miniguide.routes.presentation.pointSearch.PointSearchFragment"
+        android:label="point_search_fragment"
+        tools:layout="@layout/fragment_point_search" />
+
+    <action
+        android:id="@+id/action_global_pointSearchFragment"
+        app:destination="@id/pointSearchFragment" />
+
+</navigation>

@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.miniguide"
-        minSdkVersion 28
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -21,14 +21,33 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            buildConfigField("String", "ACCESS_TOKEN", "\"pk.eyJ1IjoiZXBpY3VzIiwiYSI6ImNrbzRubnJ1YjFremsycXBnczk0ZnV0NWYifQ.kR8J7q7vH7sqI9U5vdF-rA\"")}
     }
     allprojects {
         repositories {
             jcenter()
-            maven {  url "http://maven.google.com/" }
-            maven { url 'https://github.com/yandexmobile/yandexmapkit-android/raw/maven/' }
+            maven { url "http://maven.google.com/" }
+            maven { url 'https://mapbox.bintray.com/mapbox' }
+            maven {
+                url 'https://api.mapbox.com/downloads/v2/releases/maven'
+                authentication {
+                    basic(BasicAuthentication)
+                }
+                credentials {
+                    // Do not change the username below.
+                    // This should always be `mapbox` (not your username).
+                    username = 'mapbox'
+                    // Use the secret token you stored in gradle.properties as the password
+                    password = project.properties["MAPBOX_DOWNLOADS_TOKEN"] ?: ""
+                }
+            }
             mavenCentral()
         }
+    }
+    kotlinOptions {
+        freeCompilerArgs = ["-Xallow-result-return-type"]
+        jvmTarget = "1.8"
     }
 }
 
@@ -39,6 +58,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -49,12 +70,6 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
-
-    //Yandex maps
-    implementation 'com.yandex.android:mapkit:3.5.0'
-    implementation 'com.yandex.android:directions:3.5.0'
-    implementation 'com.yandex.android:transport:3.5.0'
-    implementation 'com.yandex.android:search:3.5.0'
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -71,4 +86,18 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$ktx_version"
 
+    //permission
+    implementation "com.github.florent37:runtime-permission-kotlin:$permissionsVersion"
+
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navControllerVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navControllerVersion"
+
+    //mapBox
+    //map
+    implementation "com.mapbox.mapboxsdk:mapbox-android-sdk:$mapBoxMapVersion"
+    //navigation
+    implementation "com.mapbox.mapboxsdk:mapbox-android-navigation-ui:$mapBoxNavigationVersion"
+
+    implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.12"
 }
